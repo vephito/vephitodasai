@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/vephitodasai/static/css/main.f5182e69.css",
+    "main.js": "/vephitodasai/static/js/main.72557e7f.js",
+    "static/js/488.50709228.chunk.js": "/vephitodasai/static/js/488.50709228.chunk.js",
+    "static/media/me.jpeg": "/vephitodasai/static/media/me.55bd16fbeb1b77d45839.jpeg",
+    "static/media/p1.png": "/vephitodasai/static/media/p1.83638fd80d6e01e9bce6.png",
+    "static/media/NTR-Regular.ttf": "/vephitodasai/static/media/NTR-Regular.96839eb7b68e4482d73d.ttf",
+    "static/media/p3.png": "/vephitodasai/static/media/p3.670d754ba5e74deab94c.png",
+    "static/media/p4.png": "/vephitodasai/static/media/p4.c3e95f5580edba5ec357.png",
+    "index.html": "/vephitodasai/index.html",
+    "main.f5182e69.css.map": "/vephitodasai/static/css/main.f5182e69.css.map",
+    "main.72557e7f.js.map": "/vephitodasai/static/js/main.72557e7f.js.map",
+    "488.50709228.chunk.js.map": "/vephitodasai/static/js/488.50709228.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f5182e69.css",
+    "static/js/main.72557e7f.js"
+  ]
+}
