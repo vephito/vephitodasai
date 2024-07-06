@@ -1,0 +1,71 @@
+.contact{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    /* background-color: #1a1a1a; */
+    color: #fff;
+}
+.contact-title{
+    display: flex;
+    align-self: start;
+    padding-left:80px;
+    margin-top:-100px;
+    /* margin:0; */
+}
+.social-icons a {
+  margin-top: 10px; /* Adjust spacing between icons */
+}
+
+.social-icons .facebook {
+  color: #2361e5;
+}
+
+.social-icons .twitter {
+  color: #00acee;
+}
+
+.social-icons .linkedin {
+  color: #0e76a8;
+}
+
+.social-icons .instagram {
+  color: #e4405f;
+}
+.social-icons .github {
+    color:rgb(216, 214, 214)
+  }
+.social-icons .email{
+    color: #ecd03f;
+
+}
+.social-icons{
+    display: flex;
+    align-self: center;
+    gap:30px;
+}
+.big-text {
+    /* font-family: 'Open Sans', sans-serif; */
+    /* font-family: 'Roboto', sans-serif; */
+    color:white;
+    margin-bottom: 20px;
+    font-weight: 700; /* This makes it bold */
+    font-size: 10em; /* Adjust the size as needed */
+  }
+body.light-mode .social-icons .github {
+    color:black
+}
+body.light-mode .social-icons .email {
+    color:rgb(255, 56, 56)
+}
+body.light-mode .big-text{
+  color:#1e6fd9
+}  
+@media only screen and (max-width: 600px) {
+  .contact-title{
+    display: none;
+  }
+  .big-text{
+    font-size: 8rem;
+    /* padding:50px; */
+  }
+}

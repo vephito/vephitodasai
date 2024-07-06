@@ -1,0 +1,14 @@
+/* src/components/ProgressBar.css */
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 5px;
+    background-color: #4caf50;
+    z-index: 1000;
+    transition: width 0.25s;
+  }
+ 
+  body.light-mode .progress-bar{
+    background-color: #1877F2;
+  }

@@ -1,0 +1,12 @@
+body{
+    color: red;
+}
+.projects, .blog,.contact{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4em 1em;
+    box-sizing: border-box;
+  
+}
