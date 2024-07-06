@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/vephitodasai/static/css/main.d6c1be9e.css",
-    "main.js": "/vephitodasai/static/js/main.cda65b26.js",
+    "main.css": "/vephitodasai/static/css/main.069ab58c.css",
+    "main.js": "/vephitodasai/static/js/main.fd77bfb3.js",
     "static/js/488.50709228.chunk.js": "/vephitodasai/static/js/488.50709228.chunk.js",
     "static/media/me.jpeg": "/vephitodasai/static/media/me.d1657a7455f37576c12e.jpeg",
     "static/media/p1.png": "/vephitodasai/static/media/p1.83638fd80d6e01e9bce6.png",
@@ -9,12 +9,12 @@
     "static/media/p3.png": "/vephitodasai/static/media/p3.670d754ba5e74deab94c.png",
     "static/media/p4.png": "/vephitodasai/static/media/p4.c3e95f5580edba5ec357.png",
     "index.html": "/vephitodasai/index.html",
-    "main.d6c1be9e.css.map": "/vephitodasai/static/css/main.d6c1be9e.css.map",
-    "main.cda65b26.js.map": "/vephitodasai/static/js/main.cda65b26.js.map",
+    "main.069ab58c.css.map": "/vephitodasai/static/css/main.069ab58c.css.map",
+    "main.fd77bfb3.js.map": "/vephitodasai/static/js/main.fd77bfb3.js.map",
     "488.50709228.chunk.js.map": "/vephitodasai/static/js/488.50709228.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d6c1be9e.css",
-    "static/js/main.cda65b26.js"
+    "static/css/main.069ab58c.css",
+    "static/js/main.fd77bfb3.js"
   ]
 }
