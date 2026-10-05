@@ -1,24 +1,29 @@
 // src/components/ProgressBar.js
-import React, { useEffect, useState } from 'react';
-import '../styles/ProgressBar.css';
+import React, { useEffect, useState } from "react";
+import "../styles/ProgressBar.css";
 
 const ProgressBar = () => {
-  const [scrollPercentage, setScrollPercentage] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   const handleScroll = () => {
     const scrollTop = window.scrollY;
     const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrollPercent = (scrollTop / docHeight) * 100;
-    setScrollPercentage(scrollPercent);
+    if (docHeight > 0) {
+      setScrollProgress(Math.min(1, Math.max(0, scrollTop / docHeight)));
+    }
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <div className="progress-bar" style={{ width: `${scrollPercentage}%` }}></div>
+    <div
+      className="progress-bar"
+      style={{ transform: `scaleX(${scrollProgress})` }}
+      aria-hidden="true"
+    />
   );
 };
 

@@ -1,13 +1,15 @@
 import React from "react";
-import Fade from "react-reveal/Fade";
 import "../styles/footer.css";
-export default function footer() {
+
+export default function Footer() {
   return (
-    <div className="footer" id="contact">
-      <Fade bottom>
-     
-        <spam className="footer-text">Built and design by Vephito.</spam>
-      </Fade>
-    </div>
+    <footer className="footer-container">
+      <span className="footer-copy">
+        Designed & Built by <span className="footer-copy-highlight">Vephito Dasai</span>
+      </span>
+      <span className="footer-meta">
+        React · Node.js · Kubernetes
+      </span>
+    </footer>
   );
 }
