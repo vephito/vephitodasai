@@ -6,7 +6,7 @@ export const personalInfo = {
   phone: "7005181283",
   github: "https://github.com/vephito",
   linkedin: "https://linkedin.com/in/vephito.dasai",
-  resumeUrl: "/vephito/resume.pdf",
+  resumeUrl: (process.env.PUBLIC_URL || "") + "/resume.pdf",
   summary:
     "Backend and Platform Engineer with 2+ years of experience building and operating production systems on Kubernetes from REST APIs and distributed workers to Kubernetes platforms, high-availability databases, and production observability."
 };
