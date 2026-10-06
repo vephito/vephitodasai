@@ -6,7 +6,7 @@ export const personalInfo = {
   phone: "7005181283",
   github: "https://github.com/vephito",
   linkedin: "https://linkedin.com/in/vephito.dasai",
-  resumeUrl: (process.env.PUBLIC_URL || "") + "/resume.pdf",
+  resumeUrl: "/vephito/resume.pdf",
   summary:
     "Backend and Platform Engineer with 2+ years of experience building and operating production systems on Kubernetes from REST APIs and distributed workers to Kubernetes platforms, high-availability databases, and production observability."
 };
@@ -130,43 +130,47 @@ export const educationData = [
 
 export const projectsData = [
   {
+    id: "huntsmen",
+    title: "Huntsmen",
+    subtitle: "Community & Tournament Platform",
+    description:
+      "Collaborative tournament and community web platform featuring team rosters, event highlights, and dynamic visual layouts. Iterated and deployed on Vercel with responsive mobile and desktop workflows.",
+    technologies: ["React", "JavaScript", "CSS3", "Vercel"],
+    github: "https://github.com/vephito/huntsmen",
+    live: "https://huntsmen.vercel.app/",
+    displayUrl: "huntsmen.vercel.app"
+  },
+  {
+    id: "qrcafe",
+    title: "QR Cafe (OrderKit)",
+    subtitle: "Dine-in QR Table Ordering",
+    description:
+      "Full-stack QR cafe ordering system where guests scan their table QR code, browse live categorized food & beverage menus, and place orders that route directly into a real-time kitchen queue with zero app download required.",
+    technologies: ["Next.js", "React", "Supabase Realtime", "PostgreSQL", "QR System"],
+    github: "https://github.com/vephito/toolkit",
+    live: "https://toolkit-five-beta.vercel.app/order?shop=default-cafe&table=1&t=9cspuUcBzVT4ZOa6hPco6tad",
+    displayUrl: "toolkit-five-beta.vercel.app/order"
+  },
+  {
+    id: "orderkit-pos",
+    title: "OrderKit POS",
+    subtitle: "Cloud Point-of-Sale for Retail & Cafes",
+    description:
+      "High-speed countertop cloud POS engineered for peak retail rush. Features direct tap-to-type bulk quantity entry, instant retail/wholesale pricing toggle, 80mm ESC/POS thermal receipt printing, shift management, and Supabase RLS data isolation.",
+    technologies: ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "ESC/POS"],
+    github: "https://github.com/vephito/OrderKit-POS",
+    live: "https://order-kit-pos.vercel.app/",
+    displayUrl: "order-kit-pos.vercel.app"
+  },
+  {
     id: "attendance-notifier",
     title: "Attendance Notifier",
-    subtitle: "Serverless Monitoring & Alerting",
+    subtitle: "Serverless Automation & Alerting",
     description:
-      "Serverless automation system running on AWS Lambda with EventBridge triggers and Selenium. Automatically scrapes university attendance portals daily and dispatches SMS alerts via Twilio, eliminating manual status checks.",
+      "Event-driven serverless automation pipeline running on AWS Lambda with EventBridge triggers. Automatically scrapes academic portals daily via headless Selenium, evaluates attendance thresholds, and dispatches SMS alerts via Twilio.",
     technologies: ["Python", "AWS Lambda", "EventBridge", "Selenium", "Twilio"],
     github: "https://github.com/vephito",
-    live: null
-  },
-  {
-    id: "chat-app",
-    title: "Chat Application",
-    subtitle: "Real-time Messaging System",
-    description:
-      "Full-stack real-time chat application with authentication, instant messaging capabilities, and responsive UI.",
-    technologies: ["React", "Node.js", "Express", "Socket.io"],
-    github: "https://github.com/vephito",
-    live: "https://chat-app-sandy-zeta.vercel.app/auth"
-  },
-  {
-    id: "campus-trade",
-    title: "CampusTrade / E-Auction",
-    subtitle: "Campus Marketplace & Bidding",
-    description:
-      "Web application designed for campus trading and auctioning, enabling peer-to-peer item listings and structured bidding workflows.",
-    technologies: ["Node.js", "MongoDB", "Express", "JavaScript"],
-    github: "https://github.com/vephito/CampusTrade",
-    live: null
-  },
-  {
-    id: "gamezone",
-    title: "Gamezone Arcade",
-    subtitle: "Interactive Web Game",
-    description:
-      "Classic browser arcade game featuring responsive controls, collision detection, and score persistence.",
-    technologies: ["JavaScript", "HTML5 Canvas", "CSS3"],
-    github: "https://github.com/vephito/Gamezone",
-    live: null
+    live: null,
+    displayUrl: null
   }
 ];

@@ -1,84 +1,106 @@
 import React from "react";
 import "../styles/projects.css";
 import Fade from "react-reveal/Fade";
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import { FaGithub, FaExternalLinkAlt, FaLock } from "react-icons/fa";
 import { projectsData } from "../data/portfolioData";
+import huntsmenImg from "../assets/images/huntsmen-preview.png";
+import qrcafeImg from "../assets/images/qrcafe-menu-preview.png";
+import posImg from "../assets/images/orderkit-pos-preview.png";
 
-const projectSnippets = {
-  "attendance-notifier": {
-    filename: "lambda_handler.py",
-    code: (
-      <>
-        <span className="code-kw">import</span> boto3, selenium{"\n"}
-        <span className="code-kw">from</span> twilio.rest <span className="code-kw">import</span> Client{"\n"}
-        {"\n"}
-        <span className="code-kw">def</span> <span className="code-fn">lambda_handler</span>(event, context):{"\n"}
-        {"  "}<span className="code-comment"># Scrape university portal with headless driver</span>{"\n"}
-        {"  "}<span className="code-var">portal</span> = AttendanceScraper(headless=<span className="code-kw">True</span>){"\n"}
-        {"  "}<span className="code-var">percentage</span> = portal.get_attendance_records(){"\n"}
-        {"  "}{"\n"}
-        {"  "}<span className="code-kw">if</span> percentage &lt; <span className="code-var">75.0</span>:{"\n"}
-        {"    "}twilio.messages.create(to=<span className="code-str">"+917005181283"</span>, body=<span className="code-str">"Alert"</span>){"\n"}
-        {"  "}<span className="code-kw">return</span> &#123;<span className="code-str">"status"</span>: <span className="code-str">"dispatched"</span>&#125;
-      </>
-    )
-  },
-  "chat-app": {
-    filename: "socket_server.ts",
-    code: (
-      <>
-        <span className="code-kw">import</span> &#123; Server &#125; <span className="code-kw">from</span> <span className="code-str">"socket.io"</span>;{"\n"}
-        <span className="code-kw">import</span> &#123; createServer &#125; <span className="code-kw">from</span> <span className="code-str">"http"</span>;{"\n"}
-        {"\n"}
-        <span className="code-var">io</span>.<span className="code-fn">on</span>(<span className="code-str">"connection"</span>, (socket) =&gt; &#123;{"\n"}
-        {"  "}socket.<span className="code-fn">on</span>(<span className="code-str">"join_room"</span>, (roomId) =&gt; &#123;{"\n"}
-        {"    "}socket.join(roomId);{"\n"}
-        {"    "}socket.to(roomId).emit(<span className="code-str">"user_connected"</span>);{"\n"}
-        {"  "}&#125;);{"\n"}
-        {"  "}socket.<span className="code-fn">on</span>(<span className="code-str">"send_message"</span>, (payload) =&gt; &#123;{"\n"}
-        {"    "}io.to(payload.roomId).emit(<span className="code-str">"receive_message"</span>, payload);{"\n"}
-        {"  "}&#125;);{"\n"}
-        &#125;);
-      </>
-    )
-  },
-  "campus-trade": {
-    filename: "auction_service.js",
-    code: (
-      <>
-        <span className="code-kw">const</span> mongoose = require(<span className="code-str">"mongoose"</span>);{"\n"}
-        <span className="code-kw">const</span> Auction = require(<span className="code-str">"./models/Auction"</span>);{"\n"}
-        {"\n"}
-        <span className="code-kw">async function</span> <span className="code-fn">placeBid</span>(auctionId, userId, amount) &#123;{"\n"}
-        {"  "}<span className="code-kw">const</span> session = <span className="code-kw">await</span> mongoose.startSession();{"\n"}
-        {"  "}<span className="code-kw">try</span> &#123;{"\n"}
-        {"    "}<span className="code-comment">&#47;&#47; Execute atomic bid update</span>{"\n"}
-        {"    "}<span className="code-kw">await</span> session.withTransaction(<span className="code-kw">async</span> () =&gt; &#123;{"\n"}
-        {"      "}<span className="code-kw">await</span> Auction.findOneAndUpdate(&#123; _id: auctionId &#125;, ...);{"\n"}
-        {"    "}&#125;);{"\n"}
-        {"  "}&#125; <span className="code-kw">finally</span> &#123; session.endSession(); &#125;{"\n"}
-        &#125;
-      </>
-    )
-  },
-  "gamezone": {
-    filename: "engine.js",
-    code: (
-      <>
-        <span className="code-kw">class</span> <span className="code-fn">ArcadeEngine</span> &#123;{"\n"}
-        {"  "}<span className="code-fn">constructor</span>(canvas) &#123;{"\n"}
-        {"    "}<span className="code-kw">this</span>.ctx = canvas.getContext(<span className="code-str">"2d"</span>);{"\n"}
-        {"    "}<span className="code-kw">this</span>.entities = [];{"\n"}
-        {"  "}&#125;{"\n"}
-        {"  "}<span className="code-fn">loop</span>(timestamp) &#123;{"\n"}
-        {"    "}<span className="code-kw">this</span>.update();{"\n"}
-        {"    "}<span className="code-kw">this</span>.render();{"\n"}
-        {"    "}requestAnimationFrame((t) =&gt; <span className="code-kw">this</span>.loop(t));{"\n"}
-        {"  "}&#125;{"\n"}
-        &#125;
-      </>
-    )
-  }
+const projectImages = {
+  huntsmen: huntsmenImg,
+  qrcafe: qrcafeImg,
+  "orderkit-pos": posImg
+};
+
+const scriptSnippet = {
+  filename: "lambda_handler.py",
+  lang: "Python",
+  lines: [
+    {
+      num: 1,
+      tokens: [<span className="code-kw">import</span>, " boto3, selenium"]
+    },
+    {
+      num: 2,
+      tokens: [
+        <span className="code-kw">from</span>,
+        " twilio.rest ",
+        <span className="code-kw">import</span>,
+        " Client"
+      ]
+    },
+    { num: 3, tokens: [] },
+    {
+      num: 4,
+      tokens: [
+        <span className="code-kw">def</span>,
+        " ",
+        <span className="code-fn">lambda_handler</span>,
+        "(event, context):"
+      ]
+    },
+    {
+      num: 5,
+      tokens: [
+        "    ",
+        <span className="code-comment">{"# Headless scraping of academic attendance records"}</span>
+      ]
+    },
+    {
+      num: 6,
+      tokens: [
+        "    portal = ",
+        <span className="code-fn">AttendanceScraper</span>,
+        "(headless=",
+        <span className="code-kw">True</span>,
+        ")"
+      ]
+    },
+    {
+      num: 7,
+      tokens: [
+        "    percentage = portal.",
+        <span className="code-fn">get_attendance</span>,
+        "()"
+      ]
+    },
+    { num: 8, tokens: [] },
+    {
+      num: 9,
+      tokens: [
+        "    ",
+        <span className="code-kw">if</span>,
+        " percentage < ",
+        <span className="code-var">75.0</span>,
+        ":"
+      ]
+    },
+    {
+      num: 10,
+      tokens: [
+        "        twilio.messages.",
+        <span className="code-fn">create</span>,
+        "(to=",
+        <span className="code-str">\"+917005181283\"</span>,
+        ", body=",
+        <span className="code-str">\"Alert: Attendance low\"</span>,
+        ")"
+      ]
+    },
+    {
+      num: 11,
+      tokens: [
+        "    ",
+        <span className="code-kw">return</span>,
+        " {",
+        <span className="code-str">\"status\"</span>,
+        ": ",
+        <span className="code-str">\"dispatched\"</span>,
+        "}"
+      ]
+    }
+  ]
 };
 
 export default function Projects() {
@@ -89,7 +111,7 @@ export default function Projects() {
           <div className="section-header">
             <h2 className="section-title">Featured Projects</h2>
             <p className="section-desc">
-              Architecting scalable backend systems, serverless automation, and real-time distributed applications.
+              Production web applications, real-time cafe operations, and cloud automation systems built with clean architecture.
             </p>
           </div>
         </Fade>
@@ -97,31 +119,119 @@ export default function Projects() {
         <div className="projects-list">
           {projectsData.map((project, index) => {
             const isReverse = index % 2 === 1;
-            const snippet = projectSnippets[project.id] || projectSnippets["attendance-notifier"];
+            const previewImg = projectImages[project.id];
 
             return (
               <Fade bottom key={project.id}>
-                <div className={`project-row ${isReverse ? "reverse" : ""}`}>
-                  {/* Code Mockup Column */}
+                <article
+                  className={`project-row ${isReverse ? "reverse" : ""}`}
+                  aria-label={project.title}
+                >
+                  {/* Visual Column: Browser Screenshot Window OR Code Editor Window */}
                   <div className="project-code-col">
-                    <div className="code-mockup-window">
-                      <div className="code-window-header">
-                        <div className="code-window-dots">
-                          <span className="code-dot red"></span>
-                          <span className="code-dot yellow"></span>
-                          <span className="code-dot green"></span>
+                    {previewImg ? (
+                      <div className="browser-mockup-window">
+                        <div className="browser-window-header">
+                          <div className="browser-window-dots">
+                            <span className="browser-dot red"></span>
+                            <span className="browser-dot yellow"></span>
+                            <span className="browser-dot green"></span>
+                          </div>
+                          <div className="browser-address-bar">
+                            <FaLock className="browser-lock-icon" />
+                            <span className="browser-url-text">
+                              https://{project.displayUrl}
+                            </span>
+                          </div>
+                          <a
+                            href={project.live}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="browser-open-btn"
+                            aria-label={`Open ${project.title} in new tab`}
+                          >
+                            <FaExternalLinkAlt />
+                          </a>
                         </div>
-                        <span className="code-window-filename">{snippet.filename}</span>
+                        <a
+                          href={project.live}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="browser-screenshot-link"
+                          tabIndex={-1}
+                          aria-hidden="true"
+                        >
+                          <img
+                            src={previewImg}
+                            alt={`${project.title} live interface preview`}
+                            className="browser-screenshot-img"
+                            loading="lazy"
+                          />
+                          <div className="browser-screenshot-overlay">
+                            <span className="overlay-badge">
+                              <FaExternalLinkAlt />
+                              <span>Open Live App</span>
+                            </span>
+                          </div>
+                        </a>
                       </div>
-                      <div className="code-window-body">{snippet.code}</div>
-                    </div>
+                    ) : (
+                      <div className="code-mockup-window">
+                        <div className="code-window-header">
+                          <div className="code-window-dots">
+                            <span className="code-dot red"></span>
+                            <span className="code-dot yellow"></span>
+                            <span className="code-dot green"></span>
+                          </div>
+                          <span className="code-window-filename">
+                            {scriptSnippet.filename}
+                          </span>
+                          <span className="code-window-lang">
+                            {scriptSnippet.lang}
+                          </span>
+                        </div>
+                        <div className="code-window-body">
+                          <div className="code-lines-wrapper">
+                            {scriptSnippet.lines.map((line) => (
+                              <div key={line.num} className="code-line">
+                                <span className="code-line-num">{line.num}</span>
+                                <span className="code-line-content">
+                                  {line.tokens.length > 0 ? (
+                                    line.tokens.map((tok, tIdx) => (
+                                      <React.Fragment key={tIdx}>
+                                        {tok}
+                                      </React.Fragment>
+                                    ))
+                                  ) : (
+                                    "\u00A0"
+                                  )}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
 
                   {/* Project Info Column */}
                   <div className="project-info-col">
-                    <div className="project-number-badge">
+                    <div className="project-meta-row">
                       <span className="project-number">0{index + 1}</span>
-                      <span className="project-number-line"></span>
+                      <span className="project-meta-divider">•</span>
+                      <span className="project-subtitle-text">
+                        {project.subtitle}
+                      </span>
+                      {project.live ? (
+                        <span className="project-status-badge live">
+                          <span className="status-beacon-dot"></span>
+                          <span>Live</span>
+                        </span>
+                      ) : (
+                        <span className="project-status-badge serverless">
+                          <span>Serverless</span>
+                        </span>
+                      )}
                     </div>
 
                     <h3 className="project-title-text">{project.title}</h3>
@@ -135,37 +245,39 @@ export default function Projects() {
                       ))}
                     </div>
 
-                    <div className="project-links-row">
-                      {project.github && (
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="project-action-link"
-                        >
-                          <FaGithub />
-                          <span>View Source</span>
-                        </a>
-                      )}
+                    <div className="project-actions-row">
                       {project.live && (
                         <a
                           href={project.live}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="project-action-link"
+                          className="project-btn project-btn-primary"
+                          aria-label={`Open live demo for ${project.title}`}
                         >
-                          <FaExternalLinkAlt />
-                          <span>Live Demo</span>
+                          <FaExternalLinkAlt className="btn-icon" />
+                          <span>Live Preview</span>
+                        </a>
+                      )}
+                      {project.github && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="project-btn project-btn-secondary"
+                          aria-label={`View source code on GitHub for ${project.title}`}
+                        >
+                          <FaGithub className="btn-icon" />
+                          <span>Source Code</span>
                         </a>
                       )}
                     </div>
                   </div>
-                </div>
+                </article>
               </Fade>
             );
           })}
+          </div>
         </div>
-      </div>
-    </section>
-  );
-}
+      </section>
+    );
+  }
