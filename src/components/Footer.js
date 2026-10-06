@@ -7,9 +7,6 @@ export default function Footer() {
       <span className="footer-copy">
         Designed & Built by <span className="footer-copy-highlight">Vephito Dasai</span>
       </span>
-      <span className="footer-meta">
-        React · Node.js · Kubernetes
-      </span>
     </footer>
   );
 }

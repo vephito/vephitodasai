@@ -4,28 +4,21 @@
   background-color: #000000;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
   box-sizing: border-box;
-  flex-wrap: wrap;
-  gap: 16px;
 }
 
 .footer-copy {
   font-size: 0.85rem;
   color: #71717a;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  text-align: center;
 }
 
 .footer-copy-highlight {
   color: #ffffff;
   font-weight: 600;
-}
-
-.footer-meta {
-  font-size: 0.85rem;
-  color: #52525b;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
