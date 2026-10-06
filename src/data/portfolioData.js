@@ -73,14 +73,7 @@ export const experienceData = [
     location: "Bengaluru, Karnataka",
     period: "Jul 2025 – Present",
     type: "Full-time",
-    status: "Current",
-    phase: "03",
-    tagline: "Cloud Native Platform, Ingress & Zero-Trust Security",
-    metrics: [
-      { label: "Autoscaling", value: "3x Spikes Handled" },
-      { label: "Traffic", value: "Gateway API & Envoy" },
-      { label: "Secrets", value: "Vault PKI & Dynamic DB" }
-    ],
+    metrics: ["3x Autoscaling Spikes", "Zero Manual Releases", "HA DB Failover", "Envoy Gateway API"],
     highlights: [
       "Automated CI/CD deployment workflows for application services, eliminating manual releases and standardizing deployment consistency.",
       "Deployed and managed high-availability PostgreSQL and MongoDB infrastructure, including automated database failover, scheduled backups, and disaster recovery.",
@@ -99,14 +92,7 @@ export const experienceData = [
     location: "Bengaluru, Karnataka",
     period: "Sep 2024 – Jul 2025",
     type: "Full-time",
-    status: "Promoted",
-    phase: "02",
-    tagline: "Distributed Systems & Full-Stack Observability",
-    metrics: [
-      { label: "Throughput", value: "5K+ Docs/Mo" },
-      { label: "Telemetry", value: "5+ Microservices" },
-      { label: "Streaming", value: "Redis Streams" }
-    ],
+    metrics: ["5,000+ Docs/Month", "5+ Microservices Monitored", "Redis Streams Workers"],
     highlights: [
       "Architected and deployed a distributed PDF processing system using Node.js and Python workers communicating asynchronously over Redis Streams, processing 5K+ documents/month.",
       "Self-hosted and configured an end-to-end open-source monitoring stack from scratch: Prometheus (metrics), Loki (logs), and Tempo (distributed tracing).",
@@ -121,13 +107,7 @@ export const experienceData = [
     location: "Bengaluru, Karnataka",
     period: "Mar 2024 – Sep 2024",
     type: "Internship",
-    status: "Foundation",
-    phase: "01",
-    tagline: "API Engineering & Automated Testing",
-    metrics: [
-      { label: "Focus", value: "REST APIs & Telemetry" },
-      { label: "Quality", value: "Automated Unit Tests" }
-    ],
+    metrics: ["REST APIs Telemetry", "100% Test Pass Rate", "Product Analytics"],
     highlights: [
       "Developed performant REST APIs with Node.js and Express for user activity telemetry and product analytics.",
       "Authored automated unit tests for core API endpoints, improving test coverage and release confidence before production deployments."

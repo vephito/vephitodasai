@@ -1,149 +1,173 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../styles/experience.css";
 import Fade from "react-reveal/Fade";
-import {
-  FaCalendarAlt,
-  FaBuilding,
-  FaMapMarkerAlt,
-  FaArrowRight,
-  FaCheck
-} from "react-icons/fa";
+import { FaCalendarAlt, FaMapMarkerAlt, FaCheckCircle } from "react-icons/fa";
 import { experienceData } from "../data/portfolioData";
 
 export default function Experience() {
+  const containerRef = useRef(null);
+  const [lineProgress, setLineProgress] = useState(0.2);
+  const [activeIndices, setActiveIndices] = useState([0]);
+
+  useEffect(() => {
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (!containerRef.current) return;
+          const rect = containerRef.current.getBoundingClientRect();
+          const windowHeight = window.innerHeight;
+
+          // Compute scroll progress through the timeline container
+          const triggerPoint = windowHeight * 0.72;
+          const currentDistance = triggerPoint - rect.top;
+          const totalDistance = rect.height;
+
+          const progress = Math.min(Math.max(currentDistance / totalDistance, 0.15), 1);
+          setLineProgress(progress);
+
+          // Determine which cards are reached by the following line
+          const rowEls = containerRef.current.querySelectorAll(".timeline-row");
+          const reached = [];
+          rowEls.forEach((el, index) => {
+            const rowRect = el.getBoundingClientRect();
+            if (rowRect.top < triggerPoint + 60) {
+              reached.push(index);
+            }
+          });
+
+          // Ensure at least the first role is always illuminated
+          if (reached.length === 0) reached.push(0);
+          setActiveIndices(reached);
+
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <section className="experience-section" id="experience">
-      <div className="experience-container">
+      <div className="experience-container" ref={containerRef}>
         <Fade bottom>
           <div className="section-header">
             <h2 className="section-title">Professional Journey</h2>
             <p className="section-desc">
-              Track record of rapid engineering progression at Pagesoft — architecting Kubernetes platforms, high-availability database layers, and distributed systems.
+              Career progression building high-availability database infrastructure, Kubernetes platforms, and distributed telemetry at Pagesoft.
             </p>
           </div>
         </Fade>
 
-        {/* Career Trajectory Stepper Banner */}
-        <Fade bottom>
-          <div className="trajectory-banner">
-            <div className="trajectory-company-info">
-              <div className="trajectory-company-icon">
-                <FaBuilding />
-              </div>
-              <div>
-                <h3 className="trajectory-company-name">Pagesoft Technologies</h3>
-                <div className="trajectory-company-meta">
-                  <span>
-                    <FaMapMarkerAlt className="meta-icon" /> Bengaluru, Karnataka
-                  </span>
-                  <span className="meta-dot">•</span>
-                  <span>2+ Years Production Infrastructure</span>
-                </div>
-              </div>
-            </div>
+        <div className="timeline-interactive-wrapper">
+          {/* Static background spine rail */}
+          <div className="timeline-spine-track" aria-hidden="true"></div>
 
-            <div className="trajectory-stepper">
-              <div className="stepper-step completed">
-                <span className="step-num">01</span>
-                <span className="step-label">Backend Intern</span>
-              </div>
-              <FaArrowRight className="stepper-arrow" />
-              <div className="stepper-step completed">
-                <span className="step-num">02</span>
-                <span className="step-label">Backend Developer</span>
-              </div>
-              <FaArrowRight className="stepper-arrow" />
-              <div className="stepper-step active">
-                <span className="step-num">03</span>
-                <span className="step-label">Platform Engineer</span>
-              </div>
-            </div>
+          {/* Dynamic flowing neon beam */}
+          <div
+            className="timeline-spine-beam"
+            style={{
+              transform: `scaleY(${lineProgress})`
+            }}
+            aria-hidden="true"
+          >
+            <div className="timeline-beam-head"></div>
           </div>
-        </Fade>
 
-        {/* Vertical Engineering Timeline */}
-        <div className="timeline-wrapper">
-          <div className="timeline-spine"></div>
-
-          <div className="timeline-nodes-list">
+          {/* Timeline Milestones */}
+          <div className="timeline-rows-list">
             {experienceData.map((exp, index) => {
-              const isCurrent = exp.status === "Current";
+              const isLeft = index % 2 === 0;
+              const isReached = activeIndices.includes(index);
 
               return (
-                <Fade bottom key={exp.id}>
-                  <div
-                    className={`timeline-entry ${isCurrent ? "is-current" : ""}`}
-                  >
-                    {/* Spine Node Marker */}
-                    <div className="timeline-marker-wrapper">
-                      <div className="timeline-marker">
-                        {isCurrent ? (
-                          <span className="timeline-beacon"></span>
-                        ) : (
-                          <span className="timeline-dot"></span>
-                        )}
-                      </div>
-                      <span className="timeline-phase-label">PHASE {exp.phase}</span>
+                <div
+                  key={exp.id}
+                  className={`timeline-row ${isLeft ? "row-left" : "row-right"} ${
+                    isReached ? "is-reached" : ""
+                  }`}
+                >
+                  {/* Central Node Checkpoint */}
+                  <div className="timeline-checkpoint" aria-hidden="true">
+                    <div className={`checkpoint-dot ${isReached ? "dot-active" : ""}`}>
+                      <span className="dot-core"></span>
+                      <span className="dot-pulse-ring"></span>
                     </div>
+                    <div
+                      className={`checkpoint-connector ${
+                        isReached ? "connector-active" : ""
+                      }`}
+                    ></div>
+                  </div>
 
-                    {/* Timeline Role Card */}
-                    <article className="timeline-card" aria-label={exp.role}>
-                      <div className="timeline-card-header">
-                        <div className="role-heading-group">
-                          <div className="role-meta-row">
-                            <span className="role-type-tag">{exp.type}</span>
-                            <span className="role-status-badge">
-                              {exp.status}
-                            </span>
-                            <div className="role-period-pill">
-                              <FaCalendarAlt className="period-icon" />
-                              <span>{exp.period}</span>
-                            </div>
-                          </div>
+                  {/* Animated Experience Card */}
+                  <div
+                    className={`timeline-card-wrapper ${
+                      isReached ? "card-revealed" : ""
+                    }`}
+                  >
+                    <article className="experience-card" aria-label={`${exp.role} at ${exp.company}`}>
+                      <div className="card-ambient-glow" aria-hidden="true"></div>
 
-                          <h3 className="role-title">{exp.role}</h3>
-                          <p className="role-tagline">{exp.tagline}</p>
+                      {/* Header Row: Company & Period */}
+                      <div className="card-top-header">
+                        <div className="company-badge-group">
+                          <span className="company-name-text">{exp.company}</span>
+                          <span className="meta-bullet">•</span>
+                          <span className="location-pill">
+                            <FaMapMarkerAlt className="meta-icon" />
+                            <span>{exp.location}</span>
+                          </span>
+                        </div>
+
+                        <div className="period-badge-pill">
+                          <FaCalendarAlt className="meta-icon" />
+                          <span>{exp.period}</span>
                         </div>
                       </div>
 
-                      {/* Production Impact Metric Chips */}
-                      {exp.metrics && exp.metrics.length > 0 && (
-                        <div className="metrics-strip">
-                          {exp.metrics.map((m, mIdx) => (
-                            <div key={mIdx} className="metric-chip">
-                              <span className="metric-label">{m.label}</span>
-                              <strong className="metric-value">{m.value}</strong>
-                            </div>
+                      {/* Role Title */}
+                      <h3 className="role-heading-text">{exp.role}</h3>
+
+                      {/* Key Impact Metric Chips */}
+                      {exp.metrics && (
+                        <div className="role-metrics-row">
+                          {exp.metrics.map((metric, mIdx) => (
+                            <span key={mIdx} className="role-metric-chip">
+                              <span className="metric-chip-beacon"></span>
+                              <span>{metric}</span>
+                            </span>
                           ))}
                         </div>
                       )}
 
-                      {/* Architecture Highlights */}
-                      <ul className="highlights-list">
-                        {exp.highlights.map((item, hIdx) => (
-                          <li key={hIdx} className="highlight-item">
-                            <span className="highlight-bullet">
-                              <FaCheck />
-                            </span>
-                            <span className="highlight-text">{item}</span>
+                      {/* Bullet Highlights */}
+                      <ul className="highlights-bullet-list">
+                        {exp.highlights.map((highlight, hIdx) => (
+                          <li key={hIdx} className="highlight-bullet-item">
+                            <FaCheckCircle className="highlight-check-icon" />
+                            <span className="highlight-text">{highlight}</span>
                           </li>
                         ))}
                       </ul>
 
-                      {/* Technologies Owned */}
-                      <div className="timeline-tech-footer">
-                        <span className="tech-footer-label">Stack Owned:</span>
-                        <div className="tech-tags-wrapper">
-                          {exp.tags.map((tag, tIdx) => (
-                            <span key={tIdx} className="tech-tag">
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
+                      {/* Tech Tags */}
+                      <div className="tech-tags-list">
+                        {exp.tags.map((tag, tIdx) => (
+                          <span key={tIdx} className="tech-badge-pill">
+                            {tag}
+                          </span>
+                        ))}
                       </div>
                     </article>
                   </div>
-                </Fade>
+                </div>
               );
             })}
           </div>
